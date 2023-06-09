@@ -21,9 +21,8 @@ module.exports = (sequelize, DataTypes) => {
                 isEmail:true
             }
         },
-        mobile:{
+        phoneNumber:{
             type: DataTypes.STRING,
-            unique : true,
             validate:{
                 is: /^[0-9]{10}$/ //can be 0-9 and must have 10 digit - regular expression 
             }
