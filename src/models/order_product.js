@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 
         order_product.belongsTo(models.Product,{
             foreignKey:{
-                name:'order_productId',
+                name:'productId',
                 allowNull: false
             },
             onDelete: 'RESTRICT' //delete user but post still remain
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
 
         order_product.belongsTo(models.Order,{
             foreignKey:{
-                name:'order_productId',
+                name:'orderId',
                 allowNull: false
             },
             onDelete: 'RESTRICT' //delete user but post still remain

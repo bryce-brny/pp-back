@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
         Cart.belongsTo(models.User,{
             foreignKey:{
-                name:'cartId',
+                name:'userId',
                 allowNull: false
             },
             onDelete: 'RESTRICT' //delete user but post still remain
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 
         Cart.belongsTo(models.Product,{
             foreignKey:{
-                name:'cartId',
+                name:'productId',
                 allowNull: false
             },
             onDelete: 'RESTRICT' //delete user but post still remain
