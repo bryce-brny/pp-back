@@ -42,4 +42,10 @@ const registerSchema = Joi.object({
    
 });
 
+const loginSchema = Joi.object({
+    email: Joi.string().required(),
+    password: Joi.string().required()
+})
+
 exports.validateRegister = validate(registerSchema)
+exports.validateLogin = validate(loginSchema);

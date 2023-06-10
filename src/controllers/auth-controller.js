@@ -1,4 +1,4 @@
-const { validateRegister } = require('../validators/auth-validator')
+const { validateRegister, validateLogin } = require('../validators/auth-validator')
 const { User } = require('../models')
 const { Address } = require('../models')
 const userService = require('../services/user-service');
@@ -13,7 +13,7 @@ exports.register = async(req,res,next)=>{
         const value = validateRegister(req.body);
         const isUserExist = await userService.checkEmailExist(value.email);
         if(isUserExist){
-            createError('email already in use')
+            createError('email already in use',400)
         }
 
         // 2.hash password
@@ -37,3 +37,24 @@ exports.register = async(req,res,next)=>{
         next (err);
     }
 }; 
+
+exports.login = async(req,res,next)=>{
+    try{
+        const value = validateLogin(req.body); //validate input ที่เข้ามา 
+        const user = await userService.getUserByEmail(value.email) // เอาinputที่เข้ามา .email 
+        if(!user){
+            createError('invalid credential',400)
+        }
+        const isCorrect = await bcryptService.compare( //เอาท่เทียบ
+            value.password,
+            user.password
+            );
+            if(!isCorrect){ //ค่าไม่ตรงกัน 
+                createError('invalid credential',400)
+            }
+            const accessToken = tokenService.sign({id: user.id})
+            res.status(200).json({ accessToken })
+    }catch(err){
+        next(err);
+    }
+};
