@@ -41,7 +41,9 @@ exports.register = async(req,res,next)=>{
 exports.login = async(req,res,next)=>{
     try{
         const value = validateLogin(req.body); //validate input ที่เข้ามา 
+        console.log(value,"value")
         const user = await userService.getUserByEmail(value.email) // เอาinputที่เข้ามา .email 
+        console.log(user,"user")
         if(!user){
             createError('invalid credential',400)
         }
@@ -58,3 +60,9 @@ exports.login = async(req,res,next)=>{
         next(err);
     }
 };
+
+exports.getMe = (req,res,next) => {
+    const {password ,...output} = req.user.dataValues
+    console.log("-------------------->",output)
+    res.status(200).json({ user : output})
+}
