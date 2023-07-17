@@ -16,7 +16,6 @@ module.exports = async(req,res,next)=>{
         }
         
         const payload = tokenService.verify(token)
-        console.log('------------------->',payload)
         const user = await userService.getUserById(payload.id)
         if(!user){
             createError('unauthorized',401);

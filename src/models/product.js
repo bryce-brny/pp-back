@@ -35,20 +35,7 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty : true
             }
         },
-        size: {
-            type: DataTypes.STRING,
-            allowNull : false,
-            validate: {
-                notEmpty : true
-            }
-        },
-        stock: {
-            type: DataTypes.INTEGER,
-            allowNull : false,
-            validate: {
-                notEmpty : true
-            }
-        },
+       
         productDesc: {
             type: DataTypes.STRING,
             allowNull : false,
@@ -81,6 +68,14 @@ module.exports = (sequelize, DataTypes) => {
         });
 
         Product.hasMany(models.order_product,{
+            foreignKey:{
+                name:'productId',
+                allowNull: false
+            },
+            onDelete: 'RESTRICT' //delete user but post still remain
+        });
+
+        Product.hasMany(models.Size,{
             foreignKey:{
                 name:'productId',
                 allowNull: false

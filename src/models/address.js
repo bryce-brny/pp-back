@@ -45,18 +45,21 @@ module.exports = (sequelize, DataTypes) => {
         Address.belongsTo(models.User,{
             foreignKey:{
                 name:'userId',
-                allowNull: false
+                allowNull: false,
+            
             },
             onDelete: 'RESTRICT' //delete user but post still remain
         });
 
-        Address.hasMany(models.Order,{
-            foreignKey:{
-                name:'addressId',
-                allowNull: false
-            },
-            onDelete: 'RESTRICT' //delete user but post still remain
-        });
+        
+
+        // Address.hasMany(models.Order,{
+        //     foreignKey:{
+        //         name:'addressId',
+        //         allowNull: false
+        //     },
+        //     onDelete: 'RESTRICT' //delete user but post still remain
+        // });
 
         
 

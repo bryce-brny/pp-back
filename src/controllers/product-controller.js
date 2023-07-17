@@ -1,11 +1,11 @@
 const { validateRegister, validateLogin } = require('../validators/auth-validator')
-const { Product } = require('../models')
+const { Product,Size } = require('../models')
 const productService = require('../services/product-service')
 
 
 
 exports.getProduct = async(req,res,next) => {
-    data = await Product.findAll()
+    data = await Product.findAll({include:Size})
     res.status(200).json({ product : data})
 }
 
